@@ -81,6 +81,12 @@ const Navbar = () => {
           <button className="px-7 py-3 text-[#FF3811] hover:text-white hover:bg-[#FF3811] border border-[#FF3811] font-bold ">
             Appointment
           </button>
+          <Link
+            href={"/Login"}
+            className="px-7 py-3 hover:text-[#FF3811] text-white bg-[#FF3811] hover:bg-white border hover:border-[#FF3811] font-bold "
+          >
+            Login
+          </Link>
         </div>
       </div>
     </div>

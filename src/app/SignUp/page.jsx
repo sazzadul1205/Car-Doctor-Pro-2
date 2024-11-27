@@ -17,7 +17,12 @@ const SignUpPage = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Submitted:", data);
+    const newUser = {
+      userName: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    console.log("Form Submitted:", newUser);
   };
 
   const password = watch("password");

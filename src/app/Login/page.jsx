@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
@@ -15,11 +15,14 @@ const LoginPage = () => {
 
   const onSubmit = (data) => {
     console.log("Form Submitted:", data);
+    const newUser = {
+        UserName: data.na
+    }
   };
 
   return (
     <div className="max-w-[1200px] mx-auto min-h-screen flex items-center">
-      <div className="flex flex-wrap justify-center md:justify-between items-center w-full ">
+      <div className="flex flex-wrap justify-center md:justify-between items-center w-full">
         {/* Image */}
         <img
           src="/login.svg"
