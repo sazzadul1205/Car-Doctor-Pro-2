@@ -1,38 +1,7 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
-
-const About = [
-  {
-    image: "https://i.ibb.co/C28hxYM/Service1.jpg",
-    title: "Electric System",
-    price: 20.0,
-  },
-  {
-    image: "https://i.ibb.co/RDBxR3R/Service2.jpg",
-    title: "Engine Diagnostics",
-    price: 30.0,
-  },
-  {
-    image: "https://i.ibb.co/Q97nLmN/Service3.jpg",
-    title: "Tire Replacement",
-    price: 25.0,
-  },
-  {
-    image: "https://i.ibb.co/p02qt1D/Service4.jpg",
-    title: "Brake Repair",
-    price: 35.0,
-  },
-  {
-    image: "https://i.ibb.co/smtFJS6/Service5.jpg",
-    title: "Battery Services",
-    price: 15.0,
-  },
-  {
-    image: "https://i.ibb.co/zrz8JmN/Service6.jpg",
-    title: "Air Conditioning",
-    price: 40.0,
-  },
-];
+import { services } from "../../lib/service";
+import Image from "next/image";
 
 const Service = () => {
   return (
@@ -49,20 +18,22 @@ const Service = () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-10">
-        {About.map((service, index) => (
+        {services.map((service, index) => (
           <div
             key={index}
             className="border border-gray-300 rounded-md p-5 shadow-sm hover:shadow-lg transition-shadow"
           >
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-[310px] mx-auto rounded-xl"
+            <Image
+              src={service?.img}
+              alt={service?.title}
+              className="mx-auto rounded-xl"
+              width={310}
+              height={120}
             />
-            <p className="pt-5 text-xl font-semibold">{service.title}</p>
+            <p className="pt-5 text-xl font-semibold">{service?.title}</p>
             <div className="flex justify-between text-primary items-center pt-3">
               <p className="text-lg font-semibold">
-                Price: $ <span>{service.price.toFixed(2)}</span>
+                Price: $ <span>{service?.price}</span>
               </p>
               <FaArrowRight />
             </div>
@@ -70,8 +41,10 @@ const Service = () => {
         ))}
       </div>
 
-      <div className="py-5 flex justify-center">
-        <button className="px-7 py-3 border border-primary text-primary rounded-md hover:bg-primary hover:text-white font-semibold">More Services</button>
+      <div className="py-10 flex justify-center">
+        <button className="px-7 py-3 border border-primary text-primary rounded-md hover:bg-primary hover:text-white font-semibold">
+          More Services
+        </button>
       </div>
     </div>
   );
