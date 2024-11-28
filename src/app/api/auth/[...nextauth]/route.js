@@ -4,7 +4,6 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-// import FacebookProvider from "next-auth/providers/facebook";
 
 const handler = NextAuth({
   session: {
@@ -61,13 +60,31 @@ const handler = NextAuth({
       clientId: process.env.NEXT_JS_GITHUB_ID,
       clientSecret: process.env.NEXT_JS_GITHUB_SECRET,
     }),
-
-    // FacebookProvider({
-    //   clientId: process.env.NEXT_JS_FACEBOOK_CLIENT_ID,
-    //   clientSecret: process.env.NEXT_JS_FACEBOOK_CLIENT_SECRET,
-    // }),
   ],
-  callbacks: {},
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account.provider === "google" || account.provider === "github") {
+        const { name, email, image } = user;
+        try {
+          const db = await connectDB();
+          const userCollection = db.collection("Users");
+          const userExist = await userCollection.findOne({ email });
+          if (!userExist) {
+            const res = await userCollection.insertOne(user);
+            // console.log(res);
+
+            return user;
+          } else {
+            return user;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        return user;
+      }
+    },
+  },
   pages: {
     // Define the custom sign-in page
     signIn: "/Login", // Redirect users to the custom login page for sign-in
