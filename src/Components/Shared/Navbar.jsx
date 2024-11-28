@@ -7,9 +7,12 @@ import React from "react";
 import { IoMdMenu } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const pathName = usePathname();
+  const session = useSession();
+  // console.log(session);
 
   const links = [
     { title: "Home", path: "/" },
@@ -81,12 +84,32 @@ const Navbar = () => {
           <button className="px-7 py-3 text-[#FF3811] hover:text-white hover:bg-[#FF3811] border border-[#FF3811] font-bold ">
             Appointment
           </button>
-          <Link
-            href={"/Login"}
-            className="px-7 py-3 hover:text-[#FF3811] text-white bg-[#FF3811] hover:bg-white border hover:border-[#FF3811] font-bold "
-          >
-            Login
-          </Link>
+
+          {!session.data ? (
+            // If the user is not logged in, show the Login link
+            <Link
+              href={"/Login"}
+              className="px-7 py-3 hover:text-[#FF3811] text-white bg-[#FF3811] hover:bg-white border hover:border-[#FF3811] font-bold"
+            >
+              Login
+            </Link>
+          ) : (
+            // If the user is logged in, show the Logout button
+            <>
+              <Image
+                src={session?.data?.user?.image}
+                alt={session?.data?.user?.image}
+                width={50}
+                height={50}
+              />
+              <button
+                className="px-7 py-3 hover:text-[#FF3811] text-white bg-[#FF3811] hover:bg-white border hover:border-[#FF3811] font-bold"
+                onClick={() => signOut()} // Trigger logout using NextAuth's signOut function
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

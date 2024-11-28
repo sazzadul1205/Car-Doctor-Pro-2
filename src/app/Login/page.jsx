@@ -3,20 +3,28 @@
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import SocialSignIn from "@/Components/SocialSignIn";
 
 const LoginPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Submitted:", data);
-    const newUser = {
-        UserName: data.na
+  const onSubmit = async (data) => {
+    const email = data.email;
+    const password = data.password;
+    const resp = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (resp.status === 200) {
+      router.push("/");
     }
   };
 
@@ -95,17 +103,7 @@ const LoginPage = () => {
           <p className="text-center pt-6 font-semibold">Or Sign Up with</p>
 
           {/* Social Links */}
-          <div className="flex gap-4 justify-center mt-5">
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FaFacebookF className="text-[#3B5998] text-xl" />
-            </button>
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FaGithub className="text-black text-xl" />
-            </button>
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FcGoogle className="text-white text-xl" />
-            </button>
-          </div>
+          <SocialSignIn />
 
           <p className="text-gray-500 text-center pt-5">
             Don't have an account?{" "}

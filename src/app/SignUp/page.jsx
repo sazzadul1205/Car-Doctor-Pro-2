@@ -1,28 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub, FaLinkedin } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import SocialSignIn from "@/Components/SocialSignIn";
 
 const SignUpPage = () => {
-  const route = useRouter;
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    setLoading(true);
     const newUser = {
       userName: data.name,
       email: data.email,
       password: data.password,
     };
-    console.log("Form Submitted:", newUser);
+
+    try {
+      const resp = await fetch("http://localhost:3000/SignUp/api", {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      if (resp.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "Sign Up Successful",
+          text: "Your account has been created successfully!",
+        });
+        reset();
+      } else {
+        const responseData = await resp.json();
+        Swal.fire({
+          icon: "error",
+          title: "Sign Up Failed",
+          text: responseData.message || "Something went wrong!",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to connect to the server. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const password = watch("password");
@@ -133,26 +167,21 @@ const SignUpPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="bg-[#FF3811] hover:bg-[#ff3911a9] mt-10 py-3 w-full text-white font-semibold rounded-xl"
+              className={`${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#FF3811] hover:bg-[#ff3911a9]"
+              } mt-10 py-3 w-full text-white font-semibold rounded-xl`}
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "Signing up..." : "Sign Up"}
             </button>
           </form>
 
           <p className="text-center pt-6 font-semibold">Or Sign Up with</p>
 
           {/* Social Links */}
-          <div className="flex gap-4 justify-center mt-5">
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FaFacebookF className="text-[#3B5998] text-xl" />
-            </button>
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FaGithub className="text-black text-xl" />
-            </button>
-            <button className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]">
-              <FcGoogle className="text-white text-xl" />
-            </button>
-          </div>
+          <SocialSignIn />
 
           <p className="text-gray-500 text-center pt-5">
             Already have an account?{" "}

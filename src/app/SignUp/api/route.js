@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs"; // Import bcrypt for hashing
 import connectDB from "@/lib/connectDB";
 
 export const POST = async (request) => {
@@ -18,8 +19,12 @@ export const POST = async (request) => {
       });
     }
 
+    // Hash the user's password
+    const saltRounds = 10; // Recommended number of salt rounds
+    const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+
     // Insert the new user into the collection
-    await userCollection.insertOne(newUser);
+    await userCollection.insertOne({ ...newUser, password: hashedPassword });
     return new Response(
       JSON.stringify({ message: "User created successfully" }),
       {
