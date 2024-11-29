@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 
 const handler = NextAuth({
+  secret: process.env.JWT_SECRET,
   session: {
     // Use JSON Web Tokens (JWT) for managing sessions
     strategy: "jwt",

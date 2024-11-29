@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import SocialSignIn from "@/Components/SocialSignIn";
+import { signIn, useSession } from "next-auth/react";
 
 const SignUpPage = () => {
+  const session = useSession();
+  console.log(session);
+
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -18,9 +22,11 @@ const SignUpPage = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
+
     const newUser = {
-      userName: data.name,
+      name: data.name,
       email: data.email,
+      image: data.image,
       password: data.password,
     };
 
@@ -34,12 +40,30 @@ const SignUpPage = () => {
       });
 
       if (resp.status === 201) {
-        Swal.fire({
-          icon: "success",
-          title: "Sign Up Successful",
-          text: "Your account has been created successfully!",
+        // Automatically sign in the user
+        const signInResponse = await signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false, // Prevent automatic redirection
         });
-        reset();
+
+        if (signInResponse?.ok) {
+          // Redirect or handle success
+          Swal.fire({
+            icon: "success",
+            title: "Sign Up Successful",
+            text: "Your account has been created successfully!",
+          });
+        } else {
+          console.error("Sign-in failed:", signInResponse?.error);
+          Swal.fire({
+            icon: "error",
+            title: "Sign-In Failed",
+            text: signInResponse?.error || "Please log in manually.",
+          });
+        }
+
+        reset(); // Reset the form
       } else {
         const responseData = await resp.json();
         Swal.fire({
@@ -114,6 +138,24 @@ const SignUpPage = () => {
               {errors.email && (
                 <p className="text-red-500 text-sm pt-1">
                   {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            {/* Image */}
+            <div className="pt-10">
+              <p className="font-semibold pb-3">Image</p>
+              <input
+                type="text"
+                placeholder="Type your image"
+                {...register("image", { required: "Image is required" })}
+                className={`input input-bordered w-full ${
+                  errors.name ? "border-red-500" : ""
+                }`}
+              />
+              {errors.image && (
+                <p className="text-red-500 text-sm pt-1">
+                  {errors.image.message}
                 </p>
               )}
             </div>
