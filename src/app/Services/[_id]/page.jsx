@@ -193,11 +193,10 @@ const ServicesDetailPage = async ({ params }) => {
           {/* Price and Checkout */}
           <div className="py-5">
             <p className="text-4xl font-bold">Price $ {serviceDetails.price}</p>
-            <Link
-              href={`/Checkout/${serviceDetails._id}`}
-              className="my-4 py-3 w-full bg-primary hover:bg-red-300 text-white font-semibold"
-            >
-              Proceed Checkout
+            <Link href={`/Checkout/${serviceDetails?._id}`}>
+              <button className="my-4 py-3 w-full bg-primary hover:bg-red-300 text-white font-semibold">
+                Proceed Checkout
+              </button>
             </Link>
           </div>
         </div>
