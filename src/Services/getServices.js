@@ -1,8 +1,9 @@
+import axios from "axios";
+
 // Get all services Hook
 export const getAllServices = async () => {
-  const res = await fetch("http://localhost:3000/api/Services/Get-all");
-  const Services = res.json();
-  return Services;
+  const res = await axios.get("http://localhost:3000/api/Services/Get-all");
+  return res.data;
 };
 
 // get single Service Hook

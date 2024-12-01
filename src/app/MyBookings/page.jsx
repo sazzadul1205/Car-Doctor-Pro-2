@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 const MyBookingsPage = () => {
   const { data: session } = useSession(); // Destructure `data` from `useSession`
@@ -73,7 +74,7 @@ const MyBookingsPage = () => {
   };
 
   return (
-    <div className="text-black">
+    <div className="text-black min-h-screen">
       {/* Banner */}
       <div className="relative">
         <div className="relative">
@@ -133,7 +134,9 @@ const MyBookingsPage = () => {
                     </td>
                     <td className="py-4 space-x-3">
                       <button className="w-24 py-2 text-sm text-white bg-yellow-500 hover:bg-yellow-400 rounded">
-                        Edit
+                        <Link href={`/MyBookings/Update/${booking._id}`}>
+                          Edit
+                        </Link>
                       </button>
                       <button
                         onClick={() => handleDelete(booking._id)}

@@ -6,7 +6,7 @@ import { getAllServices } from "@/Services/getServices";
 
 const Service = async () => {
   const Services = await getAllServices();
-  const service = Services.services;
+  const serviceData = Services.services;
 
   return (
     <div className="max-w-[1200px] mx-auto text-black">
@@ -22,7 +22,7 @@ const Service = async () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-10">
-        {service.map((service, index) => (
+        {serviceData?.map((service, index) => (
           <div
             key={index}
             className="border border-gray-300 rounded-md p-5 shadow-sm hover:shadow-lg transition-shadow"

@@ -1,100 +1,83 @@
 "use client";
-
-import { useSession } from "next-auth/react";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import React from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
-const Form = ({ serviceDetails }) => {
-  const { data: session } = useSession();
-  const identity = session?.user?.email;
+const BookingsUpdateForm = ({ bookingData }) => {
   const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission
-
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data) => {
-    setIsSubmitting(true); // Disable the button
-    const submitBooking = {
-      firstName: data.firstName,
-      lastName: data.lastName,
+    const updateBooking = {
       phoneNumber: data.phoneNumber,
-      email: identity, // Access email from session
-      message: data.message,
       bookingDate: new Date().toLocaleDateString(),
-      status: "Pending",
-      serviceInfo: { ...serviceDetails },
+      status: bookingData.status,
+      message: data.message,
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/Checkout/api/new-booking",
+      const resp = await fetch(
+        `http://localhost:3000/MyBookings/api/Bookings/${bookingData._id}`,
         {
-          method: "POST",
-          body: JSON.stringify(submitBooking),
+          method: "PATCH",
+          body: JSON.stringify(updateBooking),
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
 
-      if (response.ok) {
+      if (resp.ok) {
         Swal.fire({
           icon: "success",
-          title: "Booking Successful",
-          text: "Your booking has been submitted successfully!",
+          title: "Success!",
+          text: "Booking updated successfully.",
+          confirmButtonColor: "#3085d6",
           confirmButtonText: "OK",
         });
-        reset(); // Reset the form
         router.push("/MyBookings");
       } else {
+        const errorData = await resp.json();
         Swal.fire({
           icon: "error",
-          title: "Booking Failed",
-          text: "There was an issue submitting your booking. Please try again.",
-          confirmButtonText: "OK",
+          title: "Error!",
+          text: errorData.error || "Failed to update booking.",
+          confirmButtonColor: "#d33",
+          confirmButtonText: "Try Again",
         });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Error",
-        text: "An unexpected error occurred. Please try again later.",
-        confirmButtonText: "OK",
+        title: "Error!",
+        text: "Something went wrong. Please try again later.",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Try Again",
       });
-    } finally {
-      setIsSubmitting(false); // Re-enable the button
     }
   };
 
   return (
-    <div className="py-16 max-w-[1200px] mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-slate-200 p-5">
+    <div className="py-16 max-w-[1200px] mx-auto text-black">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-slate-200 p-5 rounded-lg"
+      >
         <div className="grid grid-cols-2 gap-3">
           {/* First Name */}
           <div className="pt-5">
             <p className="font-semibold pb-3">First Name</p>
             <input
               type="text"
-              placeholder="Type your first name"
-              {...register("firstName", {
-                required: "First Name is required",
-              })}
-              className={`input input-bordered w-full ${
-                errors.firstName ? "border-red-500" : ""
-              }`}
+              defaultValue={bookingData.firstName}
+              readOnly
+              className="input input-bordered w-full bg-gray-300 cursor-not-allowed text-gray-600"
             />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm pt-1">
-                {errors.firstName.message}
-              </p>
-            )}
           </div>
 
           {/* Last Name */}
@@ -102,19 +85,10 @@ const Form = ({ serviceDetails }) => {
             <p className="font-semibold pb-3">Last Name</p>
             <input
               type="text"
-              placeholder="Type your last name"
-              {...register("lastName", {
-                required: "Last Name is required",
-              })}
-              className={`input input-bordered w-full ${
-                errors.lastName ? "border-red-500" : ""
-              }`}
+              defaultValue={bookingData.lastName}
+              readOnly
+              className="input input-bordered w-full bg-gray-300 cursor-not-allowed text-gray-600"
             />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm pt-1">
-                {errors.lastName.message}
-              </p>
-            )}
           </div>
 
           {/* Phone Number */}
@@ -122,6 +96,7 @@ const Form = ({ serviceDetails }) => {
             <p className="font-semibold pb-3">Phone Number</p>
             <input
               type="tel"
+              defaultValue={bookingData.phoneNumber}
               placeholder="Type your phone number"
               {...register("phoneNumber", {
                 required: "Phone Number is required",
@@ -146,9 +121,9 @@ const Form = ({ serviceDetails }) => {
             <p className="font-semibold pb-3">Email</p>
             <input
               type="email"
-              value={identity || ""}
+              defaultValue={bookingData.email}
               readOnly
-              className="input input-bordered w-full bg-gray-500 cursor-not-allowed text-white"
+              className="input input-bordered w-full bg-gray-300 cursor-not-allowed text-gray-600"
             />
           </div>
         </div>
@@ -161,6 +136,7 @@ const Form = ({ serviceDetails }) => {
             {...register("message", {
               required: "Message is required",
             })}
+            defaultValue={bookingData.message}
             className={`textarea textarea-bordered w-full ${
               errors.message ? "border-red-500" : ""
             }`}
@@ -190,4 +166,4 @@ const Form = ({ serviceDetails }) => {
   );
 };
 
-export default Form;
+export default BookingsUpdateForm;
