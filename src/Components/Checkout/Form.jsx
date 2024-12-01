@@ -23,6 +23,7 @@ const Form = ({ serviceDetails }) => {
       phoneNumber: data.phoneNumber,
       email: identity, // Access email from session
       bookingDate: new Date().toLocaleDateString(),
+      status: 'Pending',
       serviceInfo: { ...serviceDetails },
     };
 
