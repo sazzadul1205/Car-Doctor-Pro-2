@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const About = () => {
@@ -5,16 +6,20 @@ const About = () => {
     <div className="flex gap-5 py-32 text-black max-w-[1200px] mx-auto ">
       <div className="w-1/2 relative">
         {/* First Image */}
-        <img
+        <Image
           src="https://i.ibb.co.com/kG6BdSS/person.jpg"
           alt="Person"
+          width={460}
+          height={440}
           className="w-[460px] h-[440px]"
         />
         {/* Second Image overlapping the first one */}
         <div className="absolute -bottom-44 right-5 p-2 bg-white rounded-md">
-          <img
+          <Image
             src="https://i.ibb.co.com/ZxN0pbY/parts.jpg"
             alt="Car Parts"
+            width={320}
+            height={330}
             className="w-[327px] h-[332px] "
           />
         </div>
@@ -29,15 +34,17 @@ const About = () => {
           <p className="font-thin text-gray-400 leading-7 mt-3">
             There are many variations of passages of Lorem Ipsum available, but
             the majority have suffered alteration in some form, by injected
-            humour, or randomised words which don't look even slightly
+            humour, or randomised words which {"don't"} look even slightly
             believable.{" "}
           </p>
           <p className="font-thin text-gray-400 leading-7 mt-3">
             the majority have suffered alteration in some form, by injected
-            humour, or randomised words which don't look even slightly
+            humour, or randomised words which {"don't"} look even slightly
             believable.{" "}
           </p>
-          <button className="px-7 py-3 bg-primary mt-5 text-white font-semibold rounded-md">Get More Info</button>
+          <button className="px-7 py-3 bg-primary mt-5 text-white font-semibold rounded-md">
+            Get More Info
+          </button>
         </div>
       </div>
     </div>

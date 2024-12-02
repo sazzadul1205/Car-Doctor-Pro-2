@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { FaArrowRight, FaStar } from "react-icons/fa";
 
@@ -51,7 +52,8 @@ const Products = () => {
         <p className="text-4xl font-semibold">Browse Our Products</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected
-          humour, or randomised words which don't look even slightly believable.
+          humour, or randomised words which {"don't"} look even slightly
+          believable.
         </p>
       </div>
 
@@ -62,9 +64,11 @@ const Products = () => {
             key={index}
             className="border border-gray-300 rounded-md p-5 shadow-sm hover:shadow-lg transition-shadow"
           >
-            <img
+            <Image
               src={product.image}
               alt={product.title}
+              width={300}
+              height={200}
               className="w-[300px] h-[200px] mx-auto rounded-xl object-cover"
             />
             <div className="flex flex-col items-center pt-5">

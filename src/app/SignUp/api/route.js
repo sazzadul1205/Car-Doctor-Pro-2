@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs"; // Import bcrypt for hashing
 import connectDB from "@/lib/connectDB";
+import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
   try {
@@ -13,10 +14,13 @@ export const POST = async (request) => {
     // Check if the user already exists
     const exist = await userCollection.findOne({ email: newUser.email });
     if (exist) {
-      return new Response(JSON.stringify({ message: "User already exists" }), {
-        status: 409, // Conflict
-        headers: { "Content-Type": "application/json" },
-      });
+      return new NextResponse(
+        JSON.stringify({ message: "User already exists" }),
+        {
+          status: 409, // Conflict
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     // Hash the user's password
@@ -25,7 +29,7 @@ export const POST = async (request) => {
 
     // Insert the new user into the collection
     await userCollection.insertOne({ ...newUser, password: hashedPassword });
-    return new Response(
+    return new NextResponse(
       JSON.stringify({ message: "User created successfully" }),
       {
         status: 201, // Created
@@ -36,7 +40,7 @@ export const POST = async (request) => {
     console.error("Error in POST handler:", error);
 
     // Return a generic error message
-    return new Response(
+    return new NextResponse(
       JSON.stringify({
         message: "Something went wrong",
         error: error.message, // Provide detailed error info for debugging

@@ -50,10 +50,13 @@ const Banner = () => {
           className="carousel-item relative w-full"
         >
           {/* Background Image */}
-          <img
+          <Image
             src={slide.image}
-            className="w-full h-[800px] object-cover"
             alt={`Slide ${index + 1}`}
+            width={1400}
+            height={800}
+            className="w-full h-[800px] object-cover"
+            
           />
           {/* Semi-transparent Overlay */}
           <div className="absolute inset-0 bg-gray-800 opacity-65"></div>

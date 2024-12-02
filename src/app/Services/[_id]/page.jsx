@@ -23,9 +23,11 @@ const ServicesDetailPage = async ({ params }) => {
       <div className="relative">
         {/* Image with black overlay */}
         <div className="relative">
-          <img
+          <Image
             src="/DetailesImg.jpg"
             alt="Details Image"
+            width={1400}
+            height={300}
             className="w-full h-[300px] object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
@@ -169,7 +171,13 @@ const ServicesDetailPage = async ({ params }) => {
 
           {/* Help Section */}
           <div className="bg-black py-10 px-12 rounded-xl mt-4 text-white">
-            <img src="/logo.svg" alt="Logo" className="mx-auto" />
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={200}
+              height={200}
+              className="mx-auto"
+            />
             <p className="pt-5 font-bold text-xl px-5 text-center">
               Need Help? We Are Here To Help You
             </p>

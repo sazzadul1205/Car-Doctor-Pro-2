@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { FaRegClock } from "react-icons/fa";
 
@@ -10,7 +11,8 @@ const CoreFeatures = () => {
         <p className="text-4xl font-semibold">Why Choose Us</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected
-          humour, or randomised words which don't look even slightly believable.
+          humour, or randomised words which {"don't"} look even slightly
+          believable.
         </p>
       </div>
 
@@ -18,9 +20,11 @@ const CoreFeatures = () => {
       <div className="flex gap-3 py-10">
         {/* Feature 1 */}
         <div className="border border-black rounded-lg p-8 text-center">
-          <img
+          <Image
             src="/Icons/group.svg"
             alt="Expert Team"
+            width={75}
+            height={50}
             className="w-[75px] h-[50px] mx-auto"
           />
           <p className="font-semibold pt-4">Expert Team</p>
@@ -34,9 +38,11 @@ const CoreFeatures = () => {
 
         {/* Feature 3 */}
         <div className="border border-black rounded-lg p-8 text-center">
-          <img
+          <Image
             src="/Icons/person.svg"
             alt="24/7 Support"
+            width={75}
+            height={50}
             className="w-[75px] h-[50px] mx-auto"
           />
           <p className="font-semibold pt-4">24/7 Support</p>
@@ -44,9 +50,11 @@ const CoreFeatures = () => {
 
         {/* Feature 4 */}
         <div className="border border-black rounded-lg p-8 text-center">
-          <img
+          <Image
             src="/Icons/Wrench.svg"
             alt="Best Equipment"
+            width={75}
+            height={50}
             className="w-[75px] h-[50px] mx-auto"
           />
           <p className="font-semibold pt-4">Best Equipment</p>
@@ -54,9 +62,11 @@ const CoreFeatures = () => {
 
         {/* Feature 5 */}
         <div className="border border-black rounded-lg p-8 text-center">
-          <img
+          <Image
             src="/Icons/check.svg"
             alt="100% Guarantee"
+            width={75}
+            height={50}
             className="w-[75px] h-[50px] mx-auto"
           />
           <p className="font-semibold pt-4">100% Guarantee</p>
@@ -64,9 +74,11 @@ const CoreFeatures = () => {
 
         {/* Feature 6 */}
         <div className="border border-black rounded-lg p-8 text-center">
-          <img
+          <Image
             src="/Icons/deliveryt.svg"
             alt="Fast Delivery"
+            width={75}
+            height={50}
             className="w-[75px] h-[50px] mx-auto"
           />
           <p className="font-semibold pt-4">Fast Delivery</p>

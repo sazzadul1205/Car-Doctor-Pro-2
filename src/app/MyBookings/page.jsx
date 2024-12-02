@@ -10,25 +10,25 @@ const MyBookingsPage = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
 
-  const loadData = async () => {
-    try {
-      const resp = await fetch(
-        `http://localhost:3000/MyBookings/api/${session?.user?.email}`
-      );
-      const data = await resp.json();
-      setBookings(data?.bookings || []); // Handle undefined data
-    } catch (error) {
-      console.error("Failed to fetch bookings:", error);
-    } finally {
-      setLoading(false); // Ensure loading stops after fetch
-    }
-  };
-
   useEffect(() => {
+    const loadData = async () => {
+      try {
+        const resp = await fetch(
+          `http://localhost:3000/MyBookings/api/${session?.user?.email}`
+        );
+        const data = await resp.json();
+        setBookings(data?.bookings || []); // Handle undefined data
+      } catch (error) {
+        console.error("Failed to fetch bookings:", error);
+      } finally {
+        setLoading(false); // Ensure loading stops after fetch
+      }
+    };
+
     if (session?.user?.email) {
       loadData();
     }
-  }, [session]);
+  }, [session]); // Dependencies array includes 'session'
 
   const handleDelete = async (_id) => {
     // Show confirmation dialog
@@ -56,7 +56,12 @@ const MyBookingsPage = () => {
           // Show success alert
           Swal.fire("Deleted!", "Your booking has been deleted.", "success");
           // Refresh data
-          loadData();
+          setLoading(true);
+          const refreshedBookings = await fetch(
+            `http://localhost:3000/MyBookings/api/${session?.user?.email}`
+          ).then((res) => res.json());
+          setBookings(refreshedBookings?.bookings || []);
+          setLoading(false);
         } else {
           // Show error alert with server-provided message
           Swal.fire("Error!", data.error || "Something went wrong.", "error");
@@ -78,9 +83,11 @@ const MyBookingsPage = () => {
       {/* Banner */}
       <div className="relative">
         <div className="relative">
-          <img
+          <Image
             src="/DetailesImg.jpg"
             alt="Details Image"
+            width={1400}
+            height={300}
             className="w-full h-[300px] object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -68,7 +69,8 @@ const Testimonials = () => {
         <p className="text-4xl font-semibold">What Customer Says</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected
-          humour, or randomised words which don't look even slightly believable.
+          humour, or randomised words which {"don't"} look even slightly
+          believable.
         </p>
       </div>
 
@@ -94,9 +96,11 @@ const Testimonials = () => {
                 {/* Top */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img
+                    <Image
                       src={testimonial.image}
                       alt={testimonial.name}
+                      width={60}
+                      height={60}
                       className="w-[60px]"
                     />
                     <div className="ml-5">
@@ -108,7 +112,13 @@ const Testimonials = () => {
                       </p>
                     </div>
                   </div>
-                  <img src="Icons/quote.svg" alt="Quote" className="w-[55px]" />
+                  <Image
+                    src="Icons/quote.svg"
+                    alt="Quote"
+                    width={55}
+                    height={55}
+                    className="w-[55px]"
+                  />
                 </div>
                 {/* Quote */}
                 <p className="text-gray-500 leading-7">{testimonial.quote}</p>

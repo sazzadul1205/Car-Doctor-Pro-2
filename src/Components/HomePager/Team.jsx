@@ -1,9 +1,8 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 import {
-  FaFacebook,
   FaFacebookF,
-  FaGoogle,
   FaInstagram,
   FaLinkedin,
   FaTwitter,
@@ -105,7 +104,8 @@ const Team = () => {
         <p className="text-4xl font-semibold">Meet Our Team</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected
-          humour, or randomised words which don't look even slightly believable.
+          humour, or randomized words which {"don't"} look even slightly
+          believable.
         </p>
       </div>
 
@@ -127,9 +127,11 @@ const Team = () => {
                 key={index}
                 className="border border-gray-300 rounded-md p-5 shadow-md hover:shadow-lg transition-shadow w-[370px] flex-shrink-0 "
               >
-                <img
+                <Image
                   src={slide.image}
                   alt={slide.name}
+                  width={200}
+                  height={200}
                   className="w-full h-[200px] object-cover rounded-md"
                 />
                 <div className="text-center pt-4">

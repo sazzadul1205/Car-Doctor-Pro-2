@@ -1,5 +1,6 @@
 import connectDB from "@/lib/connectDB";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 export const DELETE = async (request, { params }) => {
   try {
@@ -8,9 +9,12 @@ export const DELETE = async (request, { params }) => {
 
     // Validate `params._id`
     if (!params?._id) {
-      return new Response(JSON.stringify({ error: "Booking ID is required" }), {
-        status: 400,
-      });
+      return new NextResponse(
+        JSON.stringify({ error: "Booking ID is required" }),
+        {
+          status: 400,
+        }
+      );
     }
 
     const result = await bookingsCollection.deleteOne({
@@ -18,21 +22,24 @@ export const DELETE = async (request, { params }) => {
     });
 
     if (result.deletedCount === 0) {
-      return new Response(
+      return new NextResponse(
         JSON.stringify({ error: "No booking found with the given ID" }),
         { status: 404 }
       );
     }
 
-    return new Response(
+    return new NextResponse(
       JSON.stringify({ message: "Booking deleted successfully" }),
       { status: 200 }
     );
   } catch (error) {
     console.error("Error deleting booking:", error);
-    return new Response(JSON.stringify({ error: "Failed to delete booking" }), {
-      status: 500,
-    });
+    return new NextResponse(
+      JSON.stringify({ error: "Failed to delete booking" }),
+      {
+        status: 500,
+      }
+    );
   }
 };
 
@@ -43,9 +50,12 @@ export const GET = async (request, { params }) => {
 
     // Validate `params._id`
     if (!params?._id) {
-      return new Response(JSON.stringify({ error: "Booking ID is required" }), {
-        status: 400,
-      });
+      return new NextResponse(
+        JSON.stringify({ error: "Booking ID is required" }),
+        {
+          status: 400,
+        }
+      );
     }
 
     // Fetch the booking by ID
@@ -54,18 +64,21 @@ export const GET = async (request, { params }) => {
     });
 
     if (!booking) {
-      return new Response(
+      return new NextResponse(
         JSON.stringify({ error: "No booking found with the given ID" }),
         { status: 404 }
       );
     }
 
-    return new Response(JSON.stringify(booking), { status: 200 });
+    return new NextResponse(JSON.stringify(booking), { status: 200 });
   } catch (error) {
     console.error("Error fetching booking:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch booking" }), {
-      status: 500,
-    });
+    return new NextResponse(
+      JSON.stringify({ error: "Failed to fetch booking" }),
+      {
+        status: 500,
+      }
+    );
   }
 };
 
@@ -76,10 +89,13 @@ export const PATCH = async (request, { params }) => {
 
     // Validate `params._id`
     if (!params?._id) {
-      return new Response(JSON.stringify({ error: "Booking ID is required" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new NextResponse(
+        JSON.stringify({ error: "Booking ID is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const bookingId = params._id;
@@ -98,21 +114,24 @@ export const PATCH = async (request, { params }) => {
     );
 
     if (result.matchedCount === 0) {
-      return new Response(
+      return new NextResponse(
         JSON.stringify({ error: "No booking found with the given ID" }),
         { status: 404, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    return new Response(
+    return new NextResponse(
       JSON.stringify({ message: "Booking updated successfully" }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Error updating booking:", error);
-    return new Response(JSON.stringify({ error: "Failed to update booking" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new NextResponse(
+      JSON.stringify({ error: "Failed to update booking" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 };

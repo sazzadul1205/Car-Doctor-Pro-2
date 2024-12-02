@@ -7,26 +7,26 @@ import React, { useEffect, useState } from "react";
 const MyBookingUpdatePage = ({ params }) => {
   const [bookings, setBookings] = useState(null);
 
-  const loadBooking = async () => {
-    try {
-      const bookingDetails = await fetch(
-        `http://localhost:3000/MyBookings/api/Bookings/${params?._id}`
-      );
-      if (!bookingDetails.ok) {
-        throw new Error("Failed to fetch booking details");
-      }
-      const data = await bookingDetails.json();
-      setBookings(data);
-    } catch (error) {
-      console.error("Error fetching booking data:", error);
-    }
-  };
-
   useEffect(() => {
+    const loadBooking = async () => {
+      try {
+        const bookingDetails = await fetch(
+          `http://localhost:3000/MyBookings/api/Bookings/${params?._id}`
+        );
+        if (!bookingDetails.ok) {
+          throw new Error("Failed to fetch booking details");
+        }
+        const data = await bookingDetails.json();
+        setBookings(data);
+      } catch (error) {
+        console.error("Error fetching booking data:", error);
+      }
+    };
+
     if (params) {
       loadBooking();
     }
-  }, [params]);
+  }, [params]); // Dependencies array includes 'params'
 
   if (!bookings) {
     return <div>Loading...</div>; // Show loading state until bookings are loaded
@@ -41,7 +41,7 @@ const MyBookingUpdatePage = ({ params }) => {
           <Image
             src={bookings?.serviceInfo?.img || "/DetailesImg.jpg"}
             alt={bookings?.serviceInfo?.title || "Default image"}
-            width={2400}
+            width={1400}
             height={300}
             className="w-full h-[300px] object-cover"
           />

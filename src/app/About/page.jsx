@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const About = () => {
@@ -21,13 +22,16 @@ const About = () => {
             <h2 className="text-3xl font-bold text-gray-800">Who We Are</h2>
             <p className="mt-4 text-gray-600">
               We are a team of passionate professionals dedicated to delivering
-              high-quality solutions tailored to our clients' needs. With years
-              of experience, we have become a trusted name in the industry.
+              high-quality solutions tailored to our {"clients'"} needs. With
+              years of experience, we have become a trusted name in the
+              industry.
             </p>
           </div>
-          <img
+          <Image
             src="https://via.placeholder.com/500x300"
             alt="Company Overview"
+            width={500}
+            height={300}
             className="rounded-lg shadow-lg"
           />
         </div>
@@ -65,9 +69,11 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-10 mt-10">
             {/* Team Member */}
             <div className="text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Team Member"
+                width={150}
+                height={150}
                 className="w-32 h-32 mx-auto rounded-full shadow-lg"
               />
               <h3 className="text-xl font-semibold text-gray-800 mt-4">
@@ -77,9 +83,11 @@ const About = () => {
             </div>
             {/* Repeat for more members */}
             <div className="text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Team Member"
+                width={150}
+                height={150}
                 className="w-32 h-32 mx-auto rounded-full shadow-lg"
               />
               <h3 className="text-xl font-semibold text-gray-800 mt-4">
@@ -88,9 +96,11 @@ const About = () => {
               <p className="text-gray-600">CTO</p>
             </div>
             <div className="text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Team Member"
+                width={150}
+                height={150}
                 className="w-32 h-32 mx-auto rounded-full shadow-lg"
               />
               <h3 className="text-xl font-semibold text-gray-800 mt-4">

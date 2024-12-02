@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const blogs = [
@@ -107,9 +108,11 @@ const BlogsPage = () => {
               key={blog.id}
               className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <img
+              <Image
                 src={blog.image}
                 alt={blog.title}
+                width={300}
+                height={300}
                 className="w-full h-40 object-cover"
               />
               <div className="p-5">

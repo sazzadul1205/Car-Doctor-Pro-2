@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; //for vercel deployment
+
 import About from "@/Components/HomePager/About";
 import Banner from "@/Components/HomePager/Banner";
 import Contacts from "@/Components/HomePager/Contacts";

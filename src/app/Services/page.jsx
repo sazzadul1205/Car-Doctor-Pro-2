@@ -4,9 +4,16 @@ import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 
-const ServicePage = async () => {
-  const Services = await getAllServices();
-  const serviceData = Services.services;
+// Service component fetches services directly within the page component
+const ServiceComponent = async () => {
+  // Fetch the services here directly in the component
+  let services = [];
+  try {
+    const response = await getAllServices();
+    services = response?.services || [];
+  } catch (error) {
+    console.error("Error fetching services:", error);
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto text-black min-h-screen">
@@ -14,7 +21,7 @@ const ServicePage = async () => {
       <div className="bg-primary p-[2px] mt-2"></div>
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-10 py-5">
-        {serviceData?.map((service, index) => (
+        {services?.map((service, index) => (
           <div
             key={index}
             className="border border-gray-300 rounded-md p-5 shadow-sm hover:shadow-lg transition-shadow flex flex-col"
@@ -51,4 +58,4 @@ const ServicePage = async () => {
   );
 };
 
-export default ServicePage;
+export default ServiceComponent;

@@ -34,7 +34,7 @@ const Form = ({ serviceDetails }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/Checkout/api/new-booking",
+        `http://localhost:3000/Checkout/api/new-booking`,
         {
           method: "POST",
           body: JSON.stringify(submitBooking),
@@ -68,6 +68,7 @@ const Form = ({ serviceDetails }) => {
         text: "An unexpected error occurred. Please try again later.",
         confirmButtonText: "OK",
       });
+      console.log(error);
     } finally {
       setIsSubmitting(false); // Re-enable the button
     }
