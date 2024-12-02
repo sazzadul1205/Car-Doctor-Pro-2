@@ -12,7 +12,6 @@ import { signOut, useSession } from "next-auth/react";
 const Navbar = () => {
   const pathName = usePathname();
   const session = useSession();
-  // console.log(session);
 
   const links = [
     { title: "Home", path: "/" },
@@ -20,7 +19,6 @@ const Navbar = () => {
     { title: "Services", path: "/Services" },
     { title: "My Bookings", path: "/MyBookings" },
     { title: "Blog", path: "/Blog" },
-    { title: "Contact", path: "/Contact" },
   ];
 
   return (
@@ -97,18 +95,19 @@ const Navbar = () => {
           ) : (
             // If the user is logged in, show the Logout button
             <>
-              <Image
-                src={session?.data?.user?.image}
-                alt={session?.data?.user?.image}
-                width={50}
-                height={50}
-              />
               <button
                 className="px-7 py-3 hover:text-[#FF3811] text-white bg-[#FF3811] hover:bg-white border hover:border-[#FF3811] font-bold"
                 onClick={() => signOut()} // Trigger logout using NextAuth's signOut function
               >
                 Logout
               </button>
+              <Image
+                src={session?.data?.user?.image}
+                alt={session?.data?.user?.image}
+                width={50}
+                height={50}
+                className="rounded-full w-14 h-14 object-cover"
+              />
             </>
           )}
         </div>

@@ -3,21 +3,20 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const SocialSignIn = () => {
-  const router = useRouter();
-  const session = useSession();
+  const searchParams = useSearchParams();
+
+  const path = searchParams.get(`redirect`);
 
   const handleSocialLogin = async (provider) => {
-    const resp = await signIn(provider);
-    console.log(resp);
+    const resp = await signIn(provider, {
+      redirect: true,
+      callbackUrl: path ? path : "/",
+    });
   };
-
-  if (session.status === "authenticated") {
-    router.push("/");
-  }
 
   return (
     <div className="flex gap-4 justify-center mt-5">
@@ -29,7 +28,7 @@ const SocialSignIn = () => {
         <FcGoogle className="text-white text-xl" />
       </button>
 
-      {/* Facebook */}
+      {/* GitHub */}
       <button
         onClick={() => handleSocialLogin("github")}
         className="p-4 rounded-full bg-[#F5F5F8] hover:bg-[#cacad4]"

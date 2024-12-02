@@ -1,30 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SocialSignIn from "@/Components/SocialSignIn";
 
 const LoginPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const path = searchParams.get("redirect");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [loading, setLoading] = useState(false); // State for managing loading
 
   const onSubmit = async (data) => {
+    setLoading(true); // Set loading to true when the operation starts
     const email = data.email;
     const password = data.password;
+
     const resp = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      redirect: true,
+      callbackUrl: path ? path : "/",
     });
-    if (resp.status === 200) {
+
+    setLoading(false); // Reset loading state after the operation
+    if (resp?.status === 200) {
       router.push("/");
+    } else {
+      console.error("Login failed");
     }
   };
 
@@ -94,9 +104,12 @@ const LoginPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="bg-[#FF3811] hover:bg-[#ff3911a9] mt-10 py-3 w-full text-white font-semibold rounded-xl"
+              disabled={loading} // Disable button when loading
+              className={`${
+                loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FF3811]"
+              } hover:bg-[#ff3911a9] mt-10 py-3 w-full text-white font-semibold rounded-xl`}
             >
-              Login
+              {loading ? "Logging in..." : "Login"} {/* Show loading text */}
             </button>
           </form>
 
