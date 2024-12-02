@@ -31,7 +31,7 @@ const SignUpPage = () => {
     };
 
     try {
-      const resp = await fetch("http://localhost:3000/SignUp/api", {
+      const resp = await fetch("https://car-doctor-pro-1pbo.vercel.app//SignUp/api", {
         method: "POST",
         body: JSON.stringify(newUser),
         headers: {

@@ -14,7 +14,7 @@ const MyBookingsPage = () => {
     const loadData = async () => {
       try {
         const resp = await fetch(
-          `http://localhost:3000/MyBookings/api/${session?.user?.email}`
+          `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/${session?.user?.email}`
         );
         const data = await resp.json();
         setBookings(data?.bookings || []); // Handle undefined data
@@ -46,7 +46,7 @@ const MyBookingsPage = () => {
       try {
         // Send DELETE request
         const response = await fetch(
-          `http://localhost:3000/MyBookings/api/Bookings/${_id}`,
+          `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/Bookings/${_id}`,
           { method: "DELETE" }
         );
 
@@ -58,7 +58,7 @@ const MyBookingsPage = () => {
           // Refresh data
           setLoading(true);
           const refreshedBookings = await fetch(
-            `http://localhost:3000/MyBookings/api/${session?.user?.email}`
+            `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/${session?.user?.email}`
           ).then((res) => res.json());
           setBookings(refreshedBookings?.bookings || []);
           setLoading(false);

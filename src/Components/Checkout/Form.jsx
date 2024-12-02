@@ -34,7 +34,7 @@ const Form = ({ serviceDetails }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/Checkout/api/new-booking`,
+        `https://car-doctor-pro-1pbo.vercel.app//Checkout/api/new-booking`,
         {
           method: "POST",
           body: JSON.stringify(submitBooking),

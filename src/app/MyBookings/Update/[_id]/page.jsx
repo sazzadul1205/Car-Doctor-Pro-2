@@ -11,7 +11,7 @@ const MyBookingUpdatePage = ({ params }) => {
     const loadBooking = async () => {
       try {
         const bookingDetails = await fetch(
-          `http://localhost:3000/MyBookings/api/Bookings/${params?._id}`
+          `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/Bookings/${params?._id}`
         );
         if (!bookingDetails.ok) {
           throw new Error("Failed to fetch booking details");
