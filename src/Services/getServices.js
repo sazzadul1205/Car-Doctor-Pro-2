@@ -3,7 +3,7 @@ import axios from "axios";
 // Get all services Hook
 export const getAllServices = async () => {
   try {
-    const res = await axios.get(`${process.env.NEXT_JS_BASE_URL}/api/Services/Get-all`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/Services/Get-all`);
     return res.data;
   } catch (error) {
     console.error("Error fetching all services:", error.message);
@@ -14,7 +14,7 @@ export const getAllServices = async () => {
 // Get single Service Hook
 export const getSingleService = async (_id) => {
   try {
-    const res = await fetch(`${process.env.NEXT_JS_BASE_URL}/api/Services/${_id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/Services/${_id}`);
     if (!res.ok) {
       throw new Error(`Failed to fetch service with id: ${_id}`);
     }

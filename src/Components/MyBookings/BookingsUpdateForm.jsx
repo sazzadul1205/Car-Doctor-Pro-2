@@ -22,7 +22,7 @@ const BookingsUpdateForm = ({ bookingData }) => {
 
     try {
       const resp = await fetch(
-        `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/Bookings/${bookingData._id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/MyBookings/api/Bookings/${bookingData._id}`,
         {
           method: "PATCH",
           body: JSON.stringify(updateBooking),

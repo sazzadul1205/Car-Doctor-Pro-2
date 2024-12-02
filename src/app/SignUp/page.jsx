@@ -31,13 +31,16 @@ const SignUpPage = () => {
     };
 
     try {
-      const resp = await fetch("https://car-doctor-pro-1pbo.vercel.app//SignUp/api", {
-        method: "POST",
-        body: JSON.stringify(newUser),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/SignUp/api`,
+        {
+          method: "POST",
+          body: JSON.stringify(newUser),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
 
       if (resp.status === 201) {
         // Automatically sign in the user

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import { getAllServices } from "@/Services/getServices";
 
-const Service = async () => {
+const ServiceSection = async () => {
   const Services = await getAllServices();
   const serviceData = Services.services;
 
@@ -66,4 +66,4 @@ const Service = async () => {
   );
 };
 
-export default Service;
+export default ServiceSection;

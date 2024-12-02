@@ -10,20 +10,20 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config) => {
-    // Disable Webpack caching (useful for debugging memory issues)
-    config.cache = false;
+  // webpack: (config) => {
+  //   // Disable Webpack caching (useful for debugging memory issues)
+  //   config.cache = false;
 
-    // Optional: Add performance optimizations if needed
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: "all",
-      },
-    };
+  //   // Optional: Add performance optimizations if needed
+  //   config.optimization = {
+  //     ...config.optimization,
+  //     splitChunks: {
+  //       chunks: "all",
+  //     },
+  //   };
 
-    return config;
-  },
+  //   return config;
+  // },
 };
 
 export default nextConfig;

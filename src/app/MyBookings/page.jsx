@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -9,12 +10,13 @@ const MyBookingsPage = () => {
   const { data: session } = useSession(); // Destructure `data` from `useSession`
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const resp = await fetch(
-          `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/${session?.user?.email}`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/MyBookings/api/${session?.user?.email}`
         );
         const data = await resp.json();
         setBookings(data?.bookings || []); // Handle undefined data
@@ -46,7 +48,7 @@ const MyBookingsPage = () => {
       try {
         // Send DELETE request
         const response = await fetch(
-          `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/Bookings/${_id}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/MyBookings/api/Bookings/${_id}`,
           { method: "DELETE" }
         );
 
@@ -58,7 +60,7 @@ const MyBookingsPage = () => {
           // Refresh data
           setLoading(true);
           const refreshedBookings = await fetch(
-            `https://car-doctor-pro-1pbo.vercel.app//MyBookings/api/${session?.user?.email}`
+            `${process.env.NEXT_PUBLIC_BASE_URL}/MyBookings/api/${session?.user?.email}`
           ).then((res) => res.json());
           setBookings(refreshedBookings?.bookings || []);
           setLoading(false);

@@ -5,7 +5,7 @@ import Banner from "@/Components/HomePager/Banner";
 import Contacts from "@/Components/HomePager/Contacts";
 import CoreFeatures from "@/Components/HomePager/CoreFeatures";
 import Products from "@/Components/HomePager/Products";
-import Service from "@/Components/HomePager/Service";
+import ServiceSection from "@/Components/HomePager/ServiceSection";
 import Team from "@/Components/HomePager/Team";
 import Testimonials from "@/Components/HomePager/Testimonials";
 
@@ -14,7 +14,7 @@ export default function Home() {
     <div>
       <Banner></Banner>
       <About></About>
-      <Service></Service>
+      <ServiceSection></ServiceSection>
       <Contacts></Contacts>
       <Products></Products>
       <Team></Team>
