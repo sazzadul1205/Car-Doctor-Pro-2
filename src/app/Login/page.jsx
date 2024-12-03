@@ -7,57 +7,58 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SocialSignIn from "@/Components/SocialSignIn";
 import Image from "next/image";
-import Swal from "sweetalert2"; // Import SweetAlert2
-import { Suspense } from "react"; // Import Suspense
+import Swal from "sweetalert2";
+import { Suspense } from "react";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [path, setPath] = useState(null); // State to store the redirect path
+  const [path, setPath] = useState(null); // Redirect path
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [loading, setLoading] = useState(false); // State for managing loading
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Use `useSearchParams` only on the client side
     const searchParams = new URLSearchParams(window.location.search);
     const redirectPath = searchParams.get("redirect");
     setPath(redirectPath);
   }, []);
 
   const onSubmit = async (data) => {
-    setLoading(true); // Set loading to true when the operation starts
-    const email = data.email;
-    const password = data.password;
+    setLoading(true);
+    const { email, password } = data;
 
     const resp = await signIn("credentials", {
       email,
       password,
-      redirect: true,
-      callbackUrl: path ? path : "/",
+      redirect: false, // Prevent automatic redirect for error handling
     });
 
-    setLoading(false); // Reset loading state after the operation
+    setLoading(false);
 
-    if (resp?.status === 200) {
-      // Successful login, redirect to the previous page or home
-      router.push(path || "/");
-    } else {
-      // Show error message using SweetAlert
+    if (resp?.error) {
+      // Handle different error scenarios
+      const errorMessage = resp.error.includes("Google or GitHub")
+        ? "This account is registered using Google or GitHub. Please log in with the appropriate method."
+        : "Invalid email or password. Please try again.";
+
       Swal.fire({
         icon: "error",
         title: "Login Failed",
-        text: "Invalid email or password. Please try again.",
+        text: errorMessage,
       });
+    } else if (resp?.ok) {
+      // Redirect after successful login
+      router.push(path || "/");
     }
   };
 
   return (
     <div className="max-w-[1200px] mx-auto min-h-screen flex items-center">
       <div className="flex flex-wrap justify-center md:justify-between items-center w-full">
-        {/* Image */}
+        {/* Illustration */}
         <Image
           src="/login.svg"
           alt="Login Illustration"
@@ -122,12 +123,12 @@ const LoginPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loading} // Disable button when loading
+              disabled={loading}
               className={`${
                 loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FF3811]"
               } hover:bg-[#ff3911a9] mt-10 py-3 w-full text-white font-semibold rounded-xl`}
             >
-              {loading ? "Logging in..." : "Login"} {/* Show loading text */}
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
@@ -151,7 +152,7 @@ const LoginPage = () => {
   );
 };
 
-// Wrap LoginPage with Suspense to avoid the use of searchParams during SSR
+// Wrap LoginPage with Suspense to avoid SSR issues with searchParams
 const LoginPageWrapper = () => (
   <Suspense fallback={<div>Loading...</div>}>
     <LoginPage />

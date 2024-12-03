@@ -21,7 +21,6 @@ const handler = NextAuth({
         password: {}, // Input field for password
       },
       async authorize(credentials) {
-        // Extract email and password from provided credentials
         const { email, password } = credentials;
 
         // Validate that both fields are provided
@@ -34,9 +33,17 @@ const handler = NextAuth({
 
         // Find the user in the database by email
         const currentUser = await db.collection("Users").findOne({ email });
+
         if (!currentUser) {
           // Return null if the user is not found
           return null;
+        }
+
+        // Check if the user is registered with an OAuth provider
+        if (!currentUser.password) {
+          throw new Error(
+            "This account is registered using Google or GitHub. Please log in using the appropriate method."
+          );
         }
 
         // Compare the provided password with the hashed password in the database
@@ -44,6 +51,7 @@ const handler = NextAuth({
           password,
           currentUser.password
         );
+
         if (!passwordMatched) {
           // Return null if the passwords do not match
           return null;
