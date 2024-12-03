@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <div className="bg-primary text-white py-20">
+      <div className="bg-[#FF3811] text-white py-20">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl font-bold">About Us</h1>
           <p className="mt-4 text-lg">
@@ -113,7 +113,7 @@ const About = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-primary py-16 text-white">
+      <section className="bg-[#FF3811] py-16 text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold">Join Us on Our Journey</h2>
           <p className="mt-4 text-lg">
@@ -121,10 +121,10 @@ const About = () => {
             us today.
           </p>
           <div className="mt-6">
-            <button className="bg-white text-primary font-semibold py-3 px-6 rounded-md hover:bg-gray-200">
+            <button className="bg-white text-[#FF3811] font-semibold py-3 px-6 rounded-md hover:bg-gray-200">
               Contact Us
             </button>
-            <button className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-md ml-4 hover:bg-white hover:text-primary">
+            <button className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-md ml-4 hover:bg-white hover:text-[#FF3811]">
               Learn More
             </button>
           </div>

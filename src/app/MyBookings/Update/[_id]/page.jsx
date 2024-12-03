@@ -49,7 +49,7 @@ const MyBookingUpdatePage = ({ params }) => {
         </div>
         {/* Centered text block */}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-          <div className="bg-primary px-5 py-3 text-center font-semibold text-white w-[250px]">
+          <div className="bg-[#FF3811] px-5 py-3 text-center font-semibold text-white w-[250px]">
             <p>Checkout / Checkout Form</p>
           </div>
         </div>

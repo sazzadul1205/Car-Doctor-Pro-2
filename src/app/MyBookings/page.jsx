@@ -95,7 +95,7 @@ const MyBookingsPage = () => {
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         </div>
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-          <div className="bg-primary px-5 py-3 text-center font-semibold text-white w-[250px]">
+          <div className="bg-[#FF3811] px-5 py-3 text-center font-semibold text-white w-[250px]">
             <p>Bookings / My Bookings</p>
           </div>
         </div>

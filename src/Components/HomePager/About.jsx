@@ -27,7 +27,7 @@ const About = () => {
       {/* Text Section */}
       <div className="w-1/2 ">
         <div className="w-[370px]">
-          <h2 className="text-lg font-semibold text-primary">About Us</h2>
+          <h2 className="text-lg font-semibold text-[#FF3811]">About Us</h2>
           <p className="mt-4 text-[40px] font-semibold ">
             We are qualified & of experience in this field
           </p>
@@ -42,7 +42,7 @@ const About = () => {
             humour, or randomised words which {"don't"} look even slightly
             believable.{" "}
           </p>
-          <button className="px-7 py-3 bg-primary mt-5 text-white font-semibold rounded-md">
+          <button className="px-7 py-3 bg-[#FF3811] mt-5 text-white font-semibold rounded-md">
             Get More Info
           </button>
         </div>

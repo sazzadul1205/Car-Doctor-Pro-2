@@ -178,10 +178,10 @@ const Form = ({ serviceDetails }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`bg-primary text-white py-3 font-semibold rounded-md w-full mt-5 ${
+          className={`bg-[#FF3811]1] text-white py-3 font-semibold rounded-md w-full mt-5 ${
             isSubmitting
               ? "opacity-50 cursor-not-allowed"
-              : "hover:bg-primary-dark"
+              : "hover:bg-[#FF3811]-dark"
           }`}
         >
           {isSubmitting ? "Submitting..." : "Submit"}

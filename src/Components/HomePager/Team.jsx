@@ -100,7 +100,7 @@ const Team = () => {
     <div className="max-w-[1200px] mx-auto text-black">
       {/* Section Header */}
       <div className="w-[700px] text-center pt-28 mx-auto">
-        <p className="text-primary text-xl font-semibold py-4">Team</p>
+        <p className="text-[#FF3811] text-xl font-semibold py-4">Team</p>
         <p className="text-4xl font-semibold">Meet Our Team</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected

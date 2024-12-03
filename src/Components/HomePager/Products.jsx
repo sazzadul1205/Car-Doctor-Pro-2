@@ -46,7 +46,7 @@ const Products = () => {
     <div className="max-w-[1200px] mx-auto text-black">
       {/* Section Header */}
       <div className="w-[700px] text-center pt-28 mx-auto">
-        <p className="text-primary text-xl font-semibold py-4">
+        <p className="text-[#FF3811]1] text-xl font-semibold py-4">
           Popular Products
         </p>
         <p className="text-4xl font-semibold">Browse Our Products</p>
@@ -82,7 +82,7 @@ const Products = () => {
               <p className="text-xl font-semibold">{product.title}</p>
 
               {/* Price Section */}
-              <p className="pt-3 text-lg font-semibold text-primary">
+              <p className="pt-3 text-lg font-semibold text-[#FF3811]">
                 ${product.price.toFixed(2)}
               </p>
             </div>
@@ -90,7 +90,7 @@ const Products = () => {
         ))}
       </div>
       <div className="py-10 flex justify-center">
-        <button className="px-7 py-3 border border-primary text-primary rounded-md hover:bg-primary hover:text-white font-semibold">
+        <button className="px-7 py-3 border border-[#FF3811] text-[#FF3811] rounded-md hover:bg-[#FF3811] hover:text-white font-semibold">
           More Products
         </button>
       </div>

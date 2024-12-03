@@ -34,7 +34,7 @@ const ServicesDetailPage = async ({ params }) => {
         </div>
         {/* Centered text block */}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
-          <div className="bg-primary px-5 py-3 text-center font-semibold text-white w-[250px]">
+          <div className="bg-[#FF3811] px-5 py-3 text-center font-semibold text-white w-[250px]">
             <p>Services / Services Details</p>
           </div>
         </div>
@@ -67,7 +67,7 @@ const ServicesDetailPage = async ({ params }) => {
             {serviceDetails.facility.map((fac, i) => (
               <div
                 key={i}
-                className="bg-gray-200 py-8 p-10 rounded-xl border-t-4 border-primary"
+                className="bg-gray-200 py-8 p-10 rounded-xl border-t-4 border-[#FF3811]"
               >
                 <h4 className="text-xl font-semibold py-3">{fac.name}</h4>
                 <p className="text-gray-500 leading-relaxed">{fac.details}</p>
@@ -138,7 +138,7 @@ const ServicesDetailPage = async ({ params }) => {
               <Link
                 href={`/Services/${service?._id}`}
                 key={i}
-                className="mt-4 flex items-center justify-between bg-white hover:bg-primary hover:text-white font-semibold p-4 rounded-md"
+                className="mt-4 flex items-center justify-between bg-white hover:bg-[#FF3811] hover:text-white font-semibold p-4 rounded-md"
               >
                 <p>{service.title}</p>
                 <FaArrowRight />
@@ -161,7 +161,7 @@ const ServicesDetailPage = async ({ params }) => {
                       </p>
                     </div>
                   </div>
-                  <button className="bg-primary hover:bg-red-400 px-4 rounded-xl py-4">
+                  <button className="bg-[#FF3811] hover:bg-red-400 px-4 rounded-xl py-4">
                     <FaArrowRight />
                   </button>
                 </div>
@@ -184,14 +184,14 @@ const ServicesDetailPage = async ({ params }) => {
             <div className="py-10 relative">
               <div className="bg-white text-black py-8 text-center rounded-xl">
                 <h3 className="text-xl font-bold">
-                  <span className="text-primary">Car Doctor</span> Special
+                  <span className="text-[#FF3811]">Car Doctor</span> Special
                 </h3>
                 <p className="font-bold pt-1 text-gray-400">
-                  Save up to <span className="text-primary">60% off</span>
+                  Save up to <span className="text-[#FF3811]">60% off</span>
                 </p>
               </div>
               <div className="absolute bottom-3  left-14">
-                <button className="bg-primary hover:bg-red-300 px-10 py-4 font-semibold rounded-xl text-white shadow-lg">
+                <button className="bg-[#FF3811] hover:bg-red-300 px-10 py-4 font-semibold rounded-xl text-white shadow-lg">
                   Get A Quote
                 </button>
               </div>
@@ -202,7 +202,7 @@ const ServicesDetailPage = async ({ params }) => {
           <div className="py-5">
             <p className="text-4xl font-bold">Price $ {serviceDetails.price}</p>
             <Link href={`/Checkout/${serviceDetails?._id}`}>
-              <button className="my-4 py-3 w-full bg-primary hover:bg-red-300 text-white font-semibold">
+              <button className="my-4 py-3 w-full bg-[#FF3811] hover:bg-red-300 text-white font-semibold">
                 Proceed Checkout
               </button>
             </Link>

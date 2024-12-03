@@ -39,7 +39,7 @@ const ServicesPage = async () => {
               {/* Price and Link */}
               <Link
                 href={`/Services/${service?._id}`}
-                className="flex justify-between text-primary items-center pt-3 group mt-auto"
+                className="flex justify-between text-[#FF3811] items-center pt-3 group mt-auto"
               >
                 <p className="text-lg font-semibold">
                   Price: $ <span>{service?.price}</span>

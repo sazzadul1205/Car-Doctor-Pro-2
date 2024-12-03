@@ -65,7 +65,7 @@ const Testimonials = () => {
     <div className="max-w-[1200px] mx-auto text-black px-4">
       {/* Section Header */}
       <div className="text-center pt-28">
-        <p className="text-primary text-xl font-semibold py-4">Testimonial</p>
+        <p className="text-[#FF3811] text-xl font-semibold py-4">Testimonial</p>
         <p className="text-4xl font-semibold">What Customer Says</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected

@@ -12,7 +12,7 @@ const ServiceSection = async () => {
     <div className="max-w-[1200px] mx-auto text-black">
       {/* Section Header */}
       <div className="w-[700px] text-center pt-28 mx-auto">
-        <p className="text-primary text-xl font-semibold py-4">Service</p>
+        <p className="text-[#FF3811] text-xl font-semibold py-4">Service</p>
         <p className="text-4xl font-semibold">Our Service Area</p>
         <p className="pt-3 text-gray-500 leading-6">
           The majority have suffered alteration in some form, by injected
@@ -44,7 +44,7 @@ const ServiceSection = async () => {
             {/* Price and Link */}
             <Link
               href={`/Services/${service?._id}`}
-              className="flex justify-between text-primary items-center pt-3 group mt-auto"
+              className="flex justify-between text-[#FF3811] items-center pt-3 group mt-auto"
             >
               <p className="text-lg font-semibold">
                 Price: $ <span>{service?.price}</span>
@@ -58,7 +58,7 @@ const ServiceSection = async () => {
       </div>
 
       <div className="py-10 flex justify-center">
-        <button className="px-7 py-3 border border-primary text-primary rounded-md hover:bg-primary hover:text-white font-semibold">
+        <button className="px-7 py-3 border border-[#FF3811] text-[#FF3811] rounded-md hover:bg-[#FF3811] hover:text-white font-semibold">
           <Link href={"/Services"}>More Services</Link>
         </button>
       </div>
